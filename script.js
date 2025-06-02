@@ -21,7 +21,10 @@ for (let i = 0; i < 16; i++) {
 let container = document.querySelector('.container');
 container.addEventListener('mouseover', (e) => {
     if (e.target.classList.contains('grid')) {
-        e.target.classList.add('hovered');
+        const r = randomizeColor();
+        const g = randomizeColor();
+        const b = randomizeColor();
+        e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
     }
 });
 
@@ -65,3 +68,11 @@ function createGrid(num) {
         }
     }
 }
+
+// Function to return a randon value from 0-255
+function randomizeColor () {
+    const minCeiled = Math.ceil(0);
+    const maxFloored = Math.floor(255);
+    return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
+}
+console.log(randomizeColor());
