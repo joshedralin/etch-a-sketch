@@ -12,6 +12,9 @@ for (let i = 0; i < 16; i++) {
         div.style.width = "60px";
         div.style.height = "60px";
         div.style.border = '1px solid black';
+        div.style.opacity = "0.0";
+
+        div.dataset.opacity = "0.0";
         
         divContainer.appendChild(div);
     }
@@ -25,6 +28,13 @@ container.addEventListener('mouseover', (e) => {
         const g = randomizeColor();
         const b = randomizeColor();
         e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+        
+        let opacity = parseFloat(e.target.dataset.opacity);
+        if (opacity < 1) {
+            opacity += 0.1;
+            e.target.dataset.opacity = opacity;
+            e.target.style.opacity = opacity;
+        }
     }
 });
 
@@ -63,6 +73,9 @@ function createGrid(num) {
             div.style.width = pixelSize + 'px';
             div.style.height = pixelSize + 'px';
             div.style.border = '1px solid black';
+            div.style.opacity = '0.0';
+
+            div.dataset.opacity = '0.0';
             
             divContainer.appendChild(div);
         }
