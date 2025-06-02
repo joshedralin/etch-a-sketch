@@ -1,3 +1,18 @@
-.hovered {
-    background-color: black;
+.container {
+    border-color : black;
+    border: 2px solid black;
+}
+
+button{
+    padding: 20px 20px;
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

@@ -11,9 +11,7 @@ for (let i = 0; i < 16; i++) {
         div.setAttribute('class', 'grid');
         div.style.width = "60px";
         div.style.height = "60px";
-        div.style.border = '1px solid black';
         div.style.opacity = "0.0";
-
         div.dataset.opacity = "0.0";
         
         divContainer.appendChild(div);
@@ -32,6 +30,7 @@ container.addEventListener('mouseover', (e) => {
         let opacity = parseFloat(e.target.dataset.opacity);
         if (opacity < 1) {
             opacity += 0.1;
+            opacity = Math.min(1, opacity);
             e.target.dataset.opacity = opacity;
             e.target.style.opacity = opacity;
         }
@@ -41,14 +40,25 @@ container.addEventListener('mouseover', (e) => {
 // Set grid button
 const setGrid = document.querySelector('.numberSquares');
 setGrid.addEventListener('click', () => {
-    let gridSize = prompt("Enter a grid size (Max 100)");
-    console.log(gridSize);
-    let gridSizeInt = parseInt(gridSize);
+    let gridSize;
+    let gridSizeInt;
 
-    if (typeof gridSizeInt !== 'number') {
-        gridSize = prompt("Enter a valid number (Max 100)");
-    } else if (gridSizeInt > 100) {
-        gridSizeInt = 100;
+    while (true) {
+        gridSize = prompt("Enter a grid size (Max 100)");
+        gridSizeInt = parseInt(gridSize);
+
+        if (isNaN(gridSizeInt)) {
+            alert("Please enter a valid number.");
+            continue;
+        } else if (gridSizeInt < 1) {
+            alert("Please enter a number from 1 - 100");
+            continue;
+        } else if (gridSizeInt > 100) {
+            alert("Max value is 100. Setting to 100.");
+            gridSizeInt = 100;
+        } else {
+            break;
+        }
     }
 
     let gridDiv = document.querySelectorAll('.grid');
@@ -72,9 +82,7 @@ function createGrid(num) {
             let pixelSize = parseInt(960 / num);
             div.style.width = pixelSize + 'px';
             div.style.height = pixelSize + 'px';
-            div.style.border = '1px solid black';
             div.style.opacity = '0.0';
-
             div.dataset.opacity = '0.0';
             
             divContainer.appendChild(div);
@@ -88,4 +96,3 @@ function randomizeColor () {
     const maxFloored = Math.floor(255);
     return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);
 }
-console.log(randomizeColor());
