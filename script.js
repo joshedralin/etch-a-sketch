@@ -8,6 +8,7 @@ for (let i = 0; i < 16; i++) {
 
     for (let j = 0; j < 16; j++) {
         const div = document.createElement('div');
+        div.setAttribute('class', 'grid');
         div.style.width = "50px";
         div.style.height = "50px";
         div.style.border = '1px solid black';
@@ -15,3 +16,11 @@ for (let i = 0; i < 16; i++) {
         divContainer.appendChild(div);
     }
 }
+
+// Make hover effect on grid divs
+const gridDiv = document.querySelectorAll('.grid');
+gridDiv.forEach(div => {
+    div.addEventListener('mouseenter', e => {
+        e.target.classList.add('hovered');
+    });
+});
